@@ -68,12 +68,17 @@ def tokenize(text):
 print("Preparing AG News corpus...")
 
 
-ag_sentences = [
+'''ag_sentences = [
 
     tokenize(text)
 
     for text in ag_df["text"]
 
+]'''
+
+nyt_sentences = [
+    tokenize(text)
+    for text in train_df["text"]
 ]
 
 
@@ -82,7 +87,8 @@ print("Training Word2Vec...")
 
 w2v_model = Word2Vec(
 
-    sentences=ag_sentences,
+    #sentences=ag_sentences,
+    sentences=nyt_sentences,
 
     vector_size=100,   # 100维词向量
 
