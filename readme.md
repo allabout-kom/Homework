@@ -19,7 +19,7 @@ python -m pip install pip install nltk
 glove.6B.100d.txt体积过大，不随 Git 上传，运行前准备：
 - `Homework1/data/glove/glove.6B.100d.txt`：从 [GloVe 官方压缩包](https://nlp.stanford.edu/data/glove.6B.zip) 解压获得。
 
-```
+
 train、val、test数据集均进行上传，也可以通过
 ```powershell
 python split.py
