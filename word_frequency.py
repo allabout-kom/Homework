@@ -7,9 +7,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score
 
 
-# ======================
-# 1. 读取数据
-# ======================
 
 train_df = pd.read_csv(
     "data/train.csv"
@@ -42,24 +39,13 @@ y_test = test_df["label"]
 
 
 
-# ======================
-# 2. Word Frequency
-# ======================
-
-
+# Word Frequency
 vectorizer = CountVectorizer()
 
-
-
-# 建立词表 + 训练集转换
 
 X_train = vectorizer.fit_transform(
     X_train_text
 )
-
-
-
-# 测试集转换
 
 X_test = vectorizer.transform(
     X_test_text
@@ -80,10 +66,6 @@ print(
 
 
 
-# ======================
-# 3. Logistic Regression
-# ======================
-
 
 model = LogisticRegression(
     max_iter=1000
@@ -99,10 +81,6 @@ model.fit(
 )
 
 
-
-# ======================
-# 4. Evaluation
-# ======================
 
 
 pred = model.predict(

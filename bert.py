@@ -17,10 +17,6 @@ from sklearn.metrics import accuracy_score, f1_score
 
 
 
-# ======================
-# 1. 读取数据
-# ======================
-
 train_df = pd.read_csv(
     "data/train.csv"
 )
@@ -43,10 +39,7 @@ labels_test = test_df["label"].tolist()
 
 
 
-# ======================
-# 2. 标签数字化
-# ======================
-
+# 标签数字化
 
 encoder = LabelEncoder()
 
@@ -60,18 +53,6 @@ y_test = encoder.transform(
     labels_test
 )
 
-
-
-# sports politics business
-
-# 变成：
-# 0 1 2
-
-
-
-# ======================
-# 3. Dataset
-# ======================
 
 
 class NYTDataset(Dataset):
@@ -130,10 +111,8 @@ class NYTDataset(Dataset):
 
 
 
-# ======================
-# 4. BERT tokenizer
-# ======================
 
+# BERT tokenizer
 
 tokenizer = BertTokenizer.from_pretrained(
     "google-bert/bert-base-uncased"
@@ -171,11 +150,6 @@ test_loader = DataLoader(
 
 
 
-# ======================
-# 5. 加载BERT
-# ======================
-
-
 device = torch.device(
     "cuda"
     if torch.cuda.is_available()
@@ -193,12 +167,6 @@ model = BertForSequenceClassification.from_pretrained(
 
 
 model.to(device)
-
-
-
-# ======================
-# 6. Fine-tuning
-# ======================
 
 
 optimizer = AdamW(
@@ -277,12 +245,6 @@ for epoch in range(epochs):
         "Loss:",
         total_loss
     )
-
-
-
-# ======================
-# 7. Test
-# ======================
 
 
 model.eval()

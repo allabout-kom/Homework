@@ -7,12 +7,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score
 
 
-
-# ======================
-# 1. 读取数据
-# ======================
-
-
 train_df = pd.read_csv(
     "data/train.csv"
 )
@@ -31,11 +25,6 @@ y_train = train_df["label"]
 
 y_test = test_df["label"]
 
-
-
-# ======================
-# 2. 加载GloVe
-# ======================
 
 
 def load_glove(path):
@@ -80,12 +69,6 @@ print(
 )
 
 
-
-# ======================
-# 3. 文本 -> 文档向量
-# ======================
-
-
 def document_vector(text):
 
     words = word_tokenize(
@@ -117,11 +100,6 @@ def document_vector(text):
         axis=0
     )
 
-
-
-# ======================
-# 4. 转换数据
-# ======================
 
 
 print("Transform train...")
@@ -156,11 +134,6 @@ print(
 
 
 
-# ======================
-# 5. Logistic Regression
-# ======================
-
-
 model = LogisticRegression(
     max_iter=1000
 )
@@ -174,11 +147,6 @@ model.fit(
     y_train
 )
 
-
-
-# ======================
-# 6. Evaluation
-# ======================
 
 
 pred = model.predict(

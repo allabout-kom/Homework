@@ -9,19 +9,6 @@ from sklearn.linear_model import LogisticRegression
 
 from sklearn.metrics import accuracy_score, f1_score
 
-
-
-# ==========================
-# 1. 读取数据
-# ==========================
-
-
-# AG News
-ag_df = pd.read_csv(
-    "data/ag.csv"
-)
-
-
 # NYT
 train_df = pd.read_csv(
     "data/train.csv"
@@ -33,9 +20,6 @@ test_df = pd.read_csv(
 
 
 
-print("AG News:")
-print(ag_df.shape)
-
 
 print("NYT:")
 print(
@@ -43,11 +27,6 @@ print(
     test_df.shape
 )
 
-
-
-# ==========================
-# 2. 文本分词
-# ==========================
 
 
 def tokenize(text):
@@ -60,21 +39,9 @@ def tokenize(text):
 
 
 
-# ==========================
-# 3. 使用AG News训练Word2Vec
-# ==========================
 
+print("Preparing NYT corpus...")
 
-print("Preparing AG News corpus...")
-
-
-'''ag_sentences = [
-
-    tokenize(text)
-
-    for text in ag_df["text"]
-
-]'''
 
 nyt_sentences = [
     tokenize(text)
@@ -87,7 +54,6 @@ print("Training Word2Vec...")
 
 w2v_model = Word2Vec(
 
-    #sentences=ag_sentences,
     sentences=nyt_sentences,
 
     vector_size=100,   # 100维词向量
@@ -112,9 +78,6 @@ print(
 
 
 
-# ==========================
-# 4. NYT文本 -> 文档向量
-# ==========================
 
 
 def document_vector(text):
@@ -146,11 +109,6 @@ def document_vector(text):
         axis=0
     )
 
-
-
-# ==========================
-# 5. 转换NYT文本
-# ==========================
 
 
 print("Transform NYT train...")
@@ -201,15 +159,6 @@ print(
     X_test.shape
 )
 
-# 应该类似：
-# Train vector shape: (9215,100)
-# Test vector shape: (1152,100)
-
-
-
-# ==========================
-# 6. Logistic Regression
-# ==========================
 
 
 model = LogisticRegression(
@@ -226,10 +175,6 @@ model.fit(
 )
 
 
-
-# ==========================
-# 7. Test Evaluation
-# ==========================
 
 
 test_pred = model.predict(

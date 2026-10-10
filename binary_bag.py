@@ -6,11 +6,6 @@ from sklearn.linear_model import LogisticRegression
 
 from sklearn.metrics import accuracy_score, f1_score
 
-
-# ======================
-# 1. 读取数据
-# ======================
-
 train_df = pd.read_csv(
     "data/train.csv"
 )
@@ -43,28 +38,14 @@ y_test = test_df["label"]
 
 
 
-# ======================
-# 2. Binary BoW
-# ======================
-
+# Binary BoW
 
 vectorizer = CountVectorizer(
     binary=True
 )
 
-
-# 注意：
-# 只能fit训练集
-
 X_train = vectorizer.fit_transform(
     X_train_text
-)
-
-
-# val/test只能transform
-
-X_val = vectorizer.transform(
-    X_val_text
 )
 
 X_test = vectorizer.transform(
@@ -78,7 +59,6 @@ print(
     len(vectorizer.vocabulary_)
 )
 
-
 print(
     "X_train shape:",
     X_train.shape
@@ -86,10 +66,8 @@ print(
 
 
 
-# ======================
-# 3. Logistic Regression
-# ======================
 
+#Logistic Regression
 
 model = LogisticRegression(
     max_iter=1000
@@ -105,10 +83,6 @@ model.fit(
 )
 
 
-
-# ======================
-# 4. Test
-# ======================
 
 
 pred = model.predict(
